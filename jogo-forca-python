@@ -1,0 +1,42 @@
+import random
+
+palavras = ["python", "programacao", "computador", "faculdade", "algoritmo"]
+
+palavra = random.choice(palavras)
+letras_certas = []
+tentativas = 6
+
+print("🎮 JOGO DA FORCA\n")
+
+while tentativas > 0:
+    palavra_formada = ""
+
+    for letra in palavra:
+        if letra in letras_certas:
+            palavra_formada += letra
+        else:
+            palavra_formada += "_"
+
+    print("Palavra:", palavra_formada)
+    print(f"Tentativas restantes: {tentativas}")
+
+    if "_" not in palavra_formada:
+        print("🎉 Você venceu! A palavra era:", palavra)
+        break
+
+    chute = input("Digite uma letra: ").lower()
+
+    if chute in letras_certas:
+        print("⚠️ Você já tentou essa letra!\n")
+        continue
+
+    letras_certas.append(chute)
+
+    if chute not in palavra:
+        tentativas -= 1
+        print("❌ Letra errada!\n")
+    else:
+        print("✔️ Boa! Letra correta!\n")
+
+if tentativas == 0:
+    print("💀 Você perdeu! A palavra era:", palavra)
